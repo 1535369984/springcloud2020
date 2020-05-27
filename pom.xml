@@ -9,6 +9,10 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <modules>
+    <module>cloud-provider-payment-8001</module>
+  </modules>
+
   <name>Maven</name>
   <!-- FIXME change it to the project's website -->
   <url>http://maven.apache.org/</url>
@@ -24,8 +28,8 @@
   <!--统一管理jar包版本-->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
     <junit.version>4.12</junit.version>
     <lombok.version>1.18.10</lombok.version>
     <log4j.version>1.2.17</log4j.version>
@@ -42,22 +46,22 @@
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <version>3.0.0</version>
       </dependency>
+
       <!--spring boot 2.2.2-->
+      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
+        <artifactId>spring-boot</artifactId>
         <version>2.2.2.RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
       </dependency>
+
+
 
       <!--spring cloud Hoxton.SR1-->
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>Hoxton.SR1</version>
-        <type>pom</type>
-        <scope>import</scope>
+        <version>Hoxton.release</version>
       </dependency>
 
       <!--spring cloud 阿里巴巴-->
@@ -65,8 +69,6 @@
         <groupId>com.alibaba.cloud</groupId>
         <artifactId>spring-cloud-alibaba-dependencies</artifactId>
         <version>2.1.0.RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
       </dependency>
 
       <!--mysql-->
@@ -74,7 +76,6 @@
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql.version}</version>
-        <scope>runtime</scope>
       </dependency>
       <!-- druid-->
       <dependency>
