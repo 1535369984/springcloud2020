@@ -6,7 +6,7 @@ spring:
     name: cloud-payment-service
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: org.gjt.mm.mysql.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db2020?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password:
@@ -15,6 +15,6 @@ spring:
 # MyBatis
 mybatis:
   # 搜索指定包别名
-  typeAliasesPackage: com.tcy.springcloud.entities
+#  typeAliasesPackage: com.tcy.springcloud.entities
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/*.xml
