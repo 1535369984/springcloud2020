@@ -1,0 +1,24 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-order80
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db2020?useUnicode=true&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password:
+  # 利用docker安装服务
+  cloud:
+    zookeeper:
+      connect-string: 127.0.0.1:2181
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+#  typeAliasesPackage: com.tcy.springcloud.entities
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/*.xml
+

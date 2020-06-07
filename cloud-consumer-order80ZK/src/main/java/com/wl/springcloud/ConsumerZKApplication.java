@@ -3,19 +3,17 @@ package com.wl.springcloud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * @author wl
  * @description
- * @date 2020/5/27 23:34
+ * @date 2020/5/30 22:33
  * @tel 18708125827
  */
 @SpringBootApplication
-@EnableEurekaClient
 @EnableDiscoveryClient
-public class PaymentMain8001 {
-    public static void main(String[] args){
-        SpringApplication.run(PaymentMain8001.class, args);
+public class ConsumerZKApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ConsumerZKApplication.class, args);
     }
 }
