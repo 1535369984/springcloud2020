@@ -4,9 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wl.springcloud.entities.CommonResult;
 import com.wl.springcloud.entities.Payment;
+import com.wl.springcloud.loadBalance.LoadBalancer;
+import com.wl.springcloud.loadBalance.MyLoadBalancer;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -17,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +40,12 @@ public class OrderController {
 
     @Resource
     private RestTemplate restTemplate;
+
+    @Resource(name = "myLoadBalancer")
+    private LoadBalancer loadBalancer;
+    @Resource
+    private DiscoveryClient discoveryClient;
+
 
     @GetMapping("payment/create")
     @ResponseBody
@@ -56,5 +69,24 @@ public class OrderController {
     @ResponseBody
     public CommonResult<Payment> getPayment(@PathVariable Long id) {
         return restTemplate.getForObject(PAYMENT_URL + "/payment/" + id, CommonResult.class);
+    }
+
+    @GetMapping("payment/getForEntity/{id}")
+    @ResponseBody
+    public CommonResult<Payment> getPaymentEntity(@PathVariable Long id) {
+        ResponseEntity<CommonResult> forEntity = restTemplate.getForEntity(PAYMENT_URL + "/payment/" + id, CommonResult.class);
+        if (forEntity.getStatusCode().is2xxSuccessful()) {
+            return forEntity.getBody();
+        }
+        return new CommonResult(404, "查询失败");
+    }
+
+    @GetMapping("payment/lb/{id}")
+    @ResponseBody
+    public CommonResult<Payment> demo(@PathVariable Long id) {
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        ServiceInstance serviceInstances = loadBalancer.getServiceInstances(instances);
+        URI uri = serviceInstances.getUri();
+        return restTemplate.getForObject(uri + "/payment/" + id, CommonResult.class);
     }
 }
