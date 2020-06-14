@@ -121,9 +121,7 @@
 <logger name="org.springframework.web.socket.sockjs.transport.session.WebSocketServerSockJsSession" level="DEBUG"/>
 <logger name="org.springframework.ui.freemarker.SpringTemplateLoader" level="INFO"/>
 
-<logger name="org.springframework.ui.freemarker.SpringTemplateLoader" level="INFO"/>
-
-<logger name="com.wl.springcloud" level="DEBUG"/>
+<logger name="com.github.mapper" level="INFO"/>
 <logger name="com.moonsinfo" level="INFO"/>
 
 
