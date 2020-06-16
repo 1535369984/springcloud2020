@@ -76,4 +76,8 @@ public class PaymentService {
         return  Thread.currentThread().getName() + "\t" + "调用成功，流水号：" + serialNumber;
     }
 
+    public String paymentCircuitBreaker_fallback(Integer id) {
+        return String.format("class:%s,method:%s",this.getClass().getSimpleName(), "paymentCircuitBreaker_fallback服务繁忙");
+    }
+
 }

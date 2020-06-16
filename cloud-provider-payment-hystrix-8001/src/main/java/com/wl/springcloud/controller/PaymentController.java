@@ -53,4 +53,12 @@ public class PaymentController {
         log.info("*******结果是：" + s);
         return s;
     }
+
+    @GetMapping("hystrix/circuit/break/{id}")
+    @ResponseBody
+    public String paymentCircuitBreaker(@PathVariable Integer id) {
+        String s = paymentService.paymentCircuitBreaker(id);
+        log.info("*******结果是：" + s);
+        return s;
+    }
 }
