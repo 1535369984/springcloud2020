@@ -53,6 +53,18 @@ public class PaymentController {
         }
     }
 
+    @GetMapping("get/{id}")
+    @ResponseBody
+    public CommonResult paymentById(@PathVariable Long id) {
+        Payment payment = paymentService.getById(id);
+        log.info("查询结果：" + payment);
+        if (payment != null) {
+            return new CommonResult(200, "查询成功,serverPort:" + serverPort, payment);
+        } else {
+            return new CommonResult(444, "查询失败,serverPort:" + serverPort, null);
+        }
+    }
+
     @GetMapping("feign/timeout")
     @ResponseBody
     public CommonResult timeoutDemo() {
